@@ -1,6 +1,6 @@
 # CSCI571 Assignment 02
 
-Deployment:
+## Deployment:
  - Deploying with Cloud Run or App Engine?
  - Cloud Run (best option for Flask backends)
    - How it works: Package your Flask app into a container → Cloud Run runs it on demand.
@@ -15,14 +15,15 @@ Deployment:
    - More expensive than Cloud Run/Functions if you’re just testing.
 
 
-Step-by-step: Deploy Flask to Cloud Run:
-
- - my-flask-app/
+## Step-by-step: Deploy Flask to Cloud Run:
+```
+   my-flask-app/
     ├── app.py
     ├── requirements.txt
     └── Dockerfile
-
- - Dockerfile:
+```
+```
+ Dockerfile:
    FROM python:3.11-slim
    
    WORKDIR /app
@@ -41,46 +42,48 @@ Step-by-step: Deploy Flask to Cloud Run:
        --source . \
        --region us-central1 \
        --allow-unauthenticated
-
+```
 
  - Test:
    https://flask-backend-xxxxxx-uc.a.run.app
 
 
-Step-by-step: Deploy Flash using App Engine:
-
- - my-flask-app/
+## Step-by-step: Deploy Flash using App Engine:
+```
+  my-flask-app/
     ├── app.py
     ├── requirements.txt
     └── app.yaml
-
- - app.yaml
+```
+```
+ app.yaml
    runtime: python313
    handlers:
+   `
    - url: /static
      static_dir: static
    - url: /.*
-     script: auto
+     script: auto `
+ ``` 
 
-
- - Deploy:
-   gcloud services enable cloudbuild.googleapis.com
-   gcloud services enable appengine.googleapis.com
-   gcloud services enable storage-component.googleapis.com
+ - ### Deploy:
+   - gcloud services enable cloudbuild.googleapis.com
+   - gcloud services enable appengine.googleapis.com
+   - gcloud services enable storage-component.googleapis.com
    
-   gcloud run deploy <project_name_or_name_of_the_service> --region=us-west1
-   gcloud run deploy <project_name_or_name_of_the_service> --region=us-west1 --source .
+   - gcloud run deploy <project_name_or_name_of_the_service> --region=us-west1
+   - gcloud run deploy <project_name_or_name_of_the_service> --region=us-west1 --source .
 
 
- - Test:
-   gcloud projects list ---> list project with project ID, Number
+ - ### Test:
+   - gcloud projects list ---> list project with project ID, Number
 
-   https://[PROJECT_ID]-[PROJECT_NUMBER].[REGION_ID_NAME].run.app
-   https://csci571-assignment02-506083499014.us-west1.run.app
+   - https://[PROJECT_ID]-[PROJECT_NUMBER].[REGION_ID_NAME].run.app
+   - https://csci571-assignment02-506083499014.us-west1.run.app
 
 
 
- - Check and stop:
-   gcloud run services list --region=us-west1
-   gcloud run services delete <SERVICE_NAME> --region=us-west1
+ - ### Stop:
+   - gcloud run services list --region=us-west1
+   - gcloud run services delete <SERVICE_NAME> --region=us-west1
 
