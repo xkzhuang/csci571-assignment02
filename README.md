@@ -47,8 +47,10 @@
        - `gsutil ls`
        - `gsutil iam get gs://<PROJECT_ID>.appspot.com`   --- check permission of project bucket
        - Make sure it has `roles/storage.admin` or at least `objectAdmin/objectCreator`
-         If Not:
-         - ### `gsutil iam ch serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com:objectAdmin gs://<PROJECT_ID>.appspot.com`
+       - If Not:
+         ```
+         gsutil iam ch serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com:objectAdmin gs://<PROJECT_ID>.appspot.com
+         ```
 
      - And then retry again: gcloud app deploy
 
