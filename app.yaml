@@ -20,7 +20,7 @@ runtime: python313
 #  ..... app = Flask(__name__)
 #
 # it will apply command: gunicorn -b :$PORT main:app
-entrypoint: gunicorn -b :$PORT main:app
+#entrypoint: gunicorn -b :$PORT main:app
 
 handlers:
   # This configures Google App Engine to serve the files in the app's static

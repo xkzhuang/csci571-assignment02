@@ -15,40 +15,15 @@
    - More expensive than Cloud Run/Functions if you’re just testing.
 
 
-## Step-by-step: Deploy Flask to Cloud Run:
-```
-   my-flask-app/
-    ├── app.py
-    ├── requirements.txt
-    └── Dockerfile
-```
-```
- Dockerfile:
-   FROM python:3.11-slim
-   
-   WORKDIR /app
-   COPY requirements.txt .
-   RUN pip install --no-cache-dir -r requirements.txt
-   
-   COPY app.py .
-   
-   CMD ["gunicorn", "-b", "0.0.0.0:8080", "app:app"]
-
- - Deploy:
-   gcloud config set project <YOUR_PROJECT_ID>
-   gcloud services enable run.googleapis.com
-
-   gcloud run deploy flask-backend \
-       --source . \
-       --region us-central1 \
-       --allow-unauthenticated
-```
-
- - Test:
-   https://flask-backend-xxxxxx-uc.a.run.app
-
-
 ## Step-by-step: Deploy Flash using App Engine:
+ - gcloud init
+   - create new configuration
+   - choose gcloud account
+   - creaet new google cloud project
+
+ - gcloud app create --region=us-west1 (create region)
+
+ - build the web app:
 ```
   my-flask-app/
     ├── app.py
@@ -66,12 +41,32 @@
      script: auto `
  ``` 
 
+ - ### Deploy (Each deploy will introduce a version):
+   - gcloud app deploy
+     - if this failed, check the bucket permissions:
+     - gsutil ls
+     - gsutil iam get gs://<PROJECT_ID>.appspot.com   --- check permission of project bucket
+     - Make sure it has roles/storage.admin or at least objectAdmin/objectCreator
+       If Not:
+       - ### gsutil iam ch serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com:objectAdmin gs://<PROJECT_ID>.appspot.com
+
+     - And then retry again: gcloud app deploy
+
+ - ### Turn off service
+   - gcloud app versions list
+   - gcloud app versions stop VERSION_ID
+   - (Optional) After stop version, we can delete it:
+     - gcloud app versions delete VERSION_ID
+
+
+
+## Step-by-step: Deploy Flask to Google Cloud using Cloud Run:
+
  - ### Deploy:
    - gcloud services enable cloudbuild.googleapis.com
    - gcloud services enable appengine.googleapis.com
    - gcloud services enable storage-component.googleapis.com
    
-   - gcloud run deploy <project_name_or_name_of_the_service> --region=us-west1
    - gcloud run deploy <project_name_or_name_of_the_service> --region=us-west1 --source .
 
 
@@ -80,7 +75,6 @@
 
    - https://[PROJECT_ID]-[PROJECT_NUMBER].[REGION_ID_NAME].run.app
    - https://csci571-assignment02-506083499014.us-west1.run.app
-
 
 
  - ### Stop:
