@@ -42,41 +42,42 @@
  ``` 
 
  - ### Deploy (Each deploy will introduce a version):
-   - gcloud app deploy
+   - `gcloud app deploy`
      - If this failed, check the bucket permissions:
-       - gsutil ls
-       - gsutil iam get gs://<PROJECT_ID>.appspot.com   --- check permission of project bucket
-       - Make sure it has roles/storage.admin or at least objectAdmin/objectCreator
+       - `gsutil ls`
+       - `gsutil iam get gs://<PROJECT_ID>.appspot.com`   --- check permission of project bucket
+       - Make sure it has `roles/storage.admin` or at least `objectAdmin/objectCreator`
          If Not:
-         - ### gsutil iam ch serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com:objectAdmin gs://<PROJECT_ID>.appspot.com
+         - ### `gsutil iam ch serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com:objectAdmin gs://<PROJECT_ID>.appspot.com`
 
      - And then retry again: gcloud app deploy
 
  - ### Test
-   - Eitehr use: gcloud app browse
-   - Or: https://<PROJECT_ID>.uw.r.appspot.com/
+   - Eitehr use: `gcloud app browse`
+   - Or: `https://<PROJECT_ID>.uw.r.appspot.com/`
 
  - ### Turn off service (If there is only one version, it cannot be stopped)
-   - gcloud app versions list
-   - gcloud app versions stop VERSION_ID
+   - `gcloud app versions list`
+   - `gcloud app versions stop VERSION_ID`
    - (Optional) After stop version, we can delete it:
-     - gcloud app versions delete VERSION_ID
+     - `gcloud app versions delete VERSION_ID`
 
 
 ## Step-by-step: Deploy Flask to Google Cloud using Cloud Run:
 
  - ### Deploy:
-   - gcloud services enable cloudbuild.googleapis.com
-   - gcloud services enable appengine.googleapis.com
-   - gcloud services enable storage-component.googleapis.com
+ ```
+   gcloud services enable cloudbuild.googleapis.com
+   gcloud services enable appengine.googleapis.com
+   gcloud services enable storage-component.googleapis.com
    
-   - gcloud run deploy <project_name_or_name_of_the_service> --region=us-west1 --source .
-
+   gcloud run deploy <project_name_or_name_of_the_service> --region=us-west1 --source .
+```
 
  - ### Test:
-   - gcloud projects list ---> list project with project ID, Number
+   - `gcloud projects list` ---> list project with project ID, Number
 
-   - https://[PROJECT_ID]-[PROJECT_NUMBER].[REGION_ID_NAME].run.app
+   - `https://[PROJECT_ID]-[PROJECT_NUMBER].[REGION_ID_NAME].run.app`
    - https://csci571-assignment02-506083499014.us-west1.run.app
 
 
