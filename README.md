@@ -1,5 +1,19 @@
 # CSCI571 Assignment 02
 
+### Setup Google Cloud
+ - Create a Google Cloud Account @ `https://console.cloud.google.com/`
+ - Install Google Cloud SDK (gcloud CLI)
+   - https://cloud.google.com/sdk?hl=en (click on Install SDK)
+   - And check guide: `Installing the latest gcloud CLI version (537.0.0)`
+     ```
+     sudo apt-get update
+     sudo apt-get install apt-transport-https ca-certificates gnupg curl
+     curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+     echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+     sudo apt-get update && sudo apt-get install google-cloud-cli
+     ```
+
+
 ## Deployment:
  - Deploying with Cloud Run or App Engine?
  - Cloud Run (best option for Flask backends)
