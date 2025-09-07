@@ -52,7 +52,7 @@
          gsutil iam ch serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com:objectAdmin gs://<PROJECT_ID>.appspot.com
          ```
 
-     - And then retry again: gcloud app deploy
+     - And then retry again: `gcloud app deploy`
 
  - ### Test
    - Eitehr use: `gcloud app browse`
@@ -79,8 +79,10 @@
  - ### Test:
    - `gcloud projects list` ---> list project with project ID, Number
 
-   - `https://[PROJECT_ID]-[PROJECT_NUMBER].[REGION_ID_NAME].run.app`
-   - https://csci571-assignment02-506083499014.us-west1.run.app
+   - ```
+     https://[PROJECT_ID]-[PROJECT_NUMBER].[REGION_ID_NAME].run.app
+     https://csci571-assignment02-506083499014.us-west1.run.app
+     ```
 
 
  - ### Stop:
