@@ -21,9 +21,9 @@
    - choose gcloud account
    - creaet new google cloud project
 
- - gcloud app create --region=us-west1 (create region)
+ - gcloud app create --region=us-west1
 
- - build the web app:
+ - Build the web app:
 ```
   my-flask-app/
     ├── app.py
@@ -43,21 +43,24 @@
 
  - ### Deploy (Each deploy will introduce a version):
    - gcloud app deploy
-     - if this failed, check the bucket permissions:
-     - gsutil ls
-     - gsutil iam get gs://<PROJECT_ID>.appspot.com   --- check permission of project bucket
-     - Make sure it has roles/storage.admin or at least objectAdmin/objectCreator
-       If Not:
-       - ### gsutil iam ch serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com:objectAdmin gs://<PROJECT_ID>.appspot.com
+     - If this failed, check the bucket permissions:
+       - gsutil ls
+       - gsutil iam get gs://<PROJECT_ID>.appspot.com   --- check permission of project bucket
+       - Make sure it has roles/storage.admin or at least objectAdmin/objectCreator
+         If Not:
+         - ### gsutil iam ch serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com:objectAdmin gs://<PROJECT_ID>.appspot.com
 
      - And then retry again: gcloud app deploy
 
- - ### Turn off service
+ - ### Test
+   - Eitehr use: gcloud app browse
+   - Or: https://<PROJECT_ID>.uw.r.appspot.com/
+
+ - ### Turn off service (If there is only one version, it cannot be stopped)
    - gcloud app versions list
    - gcloud app versions stop VERSION_ID
    - (Optional) After stop version, we can delete it:
      - gcloud app versions delete VERSION_ID
-
 
 
 ## Step-by-step: Deploy Flask to Google Cloud using Cloud Run:
