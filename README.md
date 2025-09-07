@@ -86,6 +86,8 @@
 
 
  - ### Stop:
-   - gcloud run services list --region=us-west1
-   - gcloud run services delete <SERVICE_NAME> --region=us-west1
+   ```
+   gcloud run services list --region=us-west1
+   gcloud run services delete <SERVICE_NAME> --region=us-west1
+   ```
 
