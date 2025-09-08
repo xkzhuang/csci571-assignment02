@@ -15,13 +15,16 @@
  - Setup python for gcloud
    ```
    sudo apt update
-   sudo apt install python3 python3-dev python3-venv python3-pip
+   sudo apt install python3 python3-pip
    pip install google-cloud-storage
    ```
    if package isolation is needed:
    ```
    mkdir <proj_folder>
    cd <proj_folder>
+   
+   sudo apt update
+   sudo apt install python3-dev python3-venv 
    python3 -m venv env
    source env/bin/activate
    
