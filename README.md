@@ -12,6 +12,25 @@
      echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
      sudo apt-get update && sudo apt-get install google-cloud-cli
      ```
+ - Setup python for gcloud
+   ```
+   sudo apt update
+   sudo apt install python3 python3-dev python3-venv python3-pip
+   pip install google-cloud-storage
+   ```
+   if package isolation is needed:
+   ```
+   mkdir <proj_folder>
+   cd <proj_folder>
+   python3 -m venv env
+   source env/bin/activate
+   
+   pip install google-cloud-storage
+   ```
+   To exit the venv and return to the system python
+   ```
+   deactivate
+   ```
 
 
 ## Deployment:
@@ -104,3 +123,4 @@
    gcloud run services list --region=us-west1
    gcloud run services delete <SERVICE_NAME> --region=us-west1
    ```
+
